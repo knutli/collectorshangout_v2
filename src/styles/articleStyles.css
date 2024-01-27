@@ -1,0 +1,60 @@
+/* articleStyles.css */
+.article-container {
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    max-width: 700px;
+    margin: auto;
+    padding: 100px 20px;
+  }
+  
+  .article-container h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    font-weight: bolder;
+  }
+
+  .article-container h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: bolder;
+  }
+
+  .article-container h4 {
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+    margin-top: 2em;
+    font-weight: bolder;
+  }
+  
+  .article-container p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+  }
+  
+  .article-container img {
+    max-width: 75%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+  }
+
+  /* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .article-container h1 {
+    font-size: 2rem; /* Smaller font size for mobile screens */
+    margin-bottom: 1rem;
+    font-weight: bolder;  
+    }
+  .article-container {
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    max-width: 700px;
+    margin: auto;
+    padding: 50px 20px;
+  }
+  }
+
+  
+  /* Add additional styling as needed */
+  

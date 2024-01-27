@@ -1,0 +1,243 @@
+.auction-create-container {
+  background-color: white;
+  padding: 5rem 12.5%;
+  /* Adjusted padding for 75% width */
+  border-radius: 0.5rem;
+  box-shadow: 0;
+  max-width: 4xl;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding-bottom: 40rem;
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif*/
+}
+
+.auction-create-title {
+  text-align: left;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #474445;
+}
+
+.auction-create-title-divider {
+  height: 1px;
+  /* Thickness of the line */
+  background-color: #e5e4e4;
+  /* Color of the line */
+  width: 100%;
+  /* Line width */
+  margin: 0 0 2rem 0;
+}
+
+.auction-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .auction-form {
+    grid-template-columns: repeat(2, minmax(0, 75%));
+    /* Each column is 75% */
+    justify-content: center;
+    /* Center the columns */
+  }
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  opacity: 80%;
+}
+
+.form-group {
+  margin: 0 0 32px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #474445;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.form-input,
+.upload-box {
+  border: 1px solid #c3ccd9;
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 12px 8px;
+  box-sizing: border-box;
+  font-size: 12px;
+  width: 80%;
+  /* Full width of the grid column */
+}
+
+.input-form-helper-text {
+  display: block;
+  color: #666;
+  /* Gray color for the helper text */
+  font-size: 12px;
+  /* Smaller font size */
+  margin: 4px;
+  width: 80%;
+  line-height: 16px;
+}
+
+.upload-box {
+  position: relative;
+  height: 100px;
+  border: 2px dashed #cdcdd1;
+  background: #f1f1f1;
+  border-radius: 0.9rem;
+}
+
+.description {
+  min-height: 120px;
+}
+
+.file-input {
+  opacity: 0;
+  /* Make the file input invisible */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.upload-instructions {
+  color: #718096;
+  pointer-events: none;
+  /* This makes sure clicks pass through to the file input */
+}
+
+.btn-primary {
+  background-color: #238975;
+  color: white;
+  padding: 0.6rem 4rem;
+  border-radius: 0.5rem;
+  border: 2px solid #e3e3e3;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #e07cdb;
+}
+
+.btn-secondary {
+  color: #e07cdb
+}
+
+.cancel-button {
+  border: 1px solid #aca4a7;
+  padding: 0.6rem 4rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+
+}
+
+.cancel-button:hover {
+  background-color: #f0f0f0;
+  border: 1.5px solid #918a8d;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-top: 2rem;
+  width: 80%;
+}
+
+.step-indicator {
+  color: #c3c3c3;
+}
+
+/* Styles for the image preview section */
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  /* Space between images */
+  margin-top: 2px;
+  /* Space above the preview section */
+  margin-left: 4px;
+}
+
+.image-preview {
+  position: relative;
+  display: inline-block;
+}
+
+.image-preview img {
+  width: 55px;
+  /* Adjust as needed */
+  height: 70px;
+  /* Adjust as needed */
+  object-fit: cover;
+  border-radius: 5px;
+
+}
+
+.delete-preview {
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  background-color: rgb(255, 73, 73);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .auction-create-title {
+    font-size: 2rem;
+    /* Smaller font size for mobile screens */
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+  }
+
+  .auction-create-container {
+    padding: 1rem 5%;
+    /* Reduce padding on smaller screens */
+  }
+
+  .auction-form {
+    grid-template-columns: 1fr;
+    /* Keep a single column layout on small screens */
+  }
+
+  .form-input,
+  .upload-box,
+  .btn-primary {
+    width: 100%;
+    /* Ensure elements are full width on smaller screens */
+  }
+
+  .btn-primary {
+    padding: 0.5rem 1.5rem;
+    /* Adjust button padding for smaller screens */
+    margin: 1rem 0;
+    /* Provide some margin around the button */
+  }
+}

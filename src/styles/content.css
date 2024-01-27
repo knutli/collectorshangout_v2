@@ -1,0 +1,146 @@
+/* Custom CSS */
+.main-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/collectors-hangout.appspot.com/o/articles%2FBackground%20image.webp?alt=media&token=d2ce40da-7eb8-439f-b54b-1be561e68bfb");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+    /* Add a media query for mobile devices */
+  @media (max-width: 768px) {
+    .main-content-container {
+        background-size:cover; 
+        background-attachment: fixed; 
+    }
+  }
+
+  .main-faq-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/collectors-hangout.appspot.com/o/articles%2FBackground%20image.webp?alt=media&token=d2ce40da-7eb8-439f-b54b-1be561e68bfb");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;  }
+
+  .content-header{
+    font-size: xx-large;
+    font-weight: bold;
+    padding-top: 10%;
+    color: #FFFFFF;
+  }
+
+  .article-card {
+    background-color: rgba(255, 255, 255, 0.25); /* Semi-transparent white background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    overflow: hidden; /* Ensures the border-radius clips the content */
+  }
+
+  .article-card:hover {
+    transform: scale(1.01); /* Slight scale on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 6px rgba(255, 255, 255, 0.7); /* Larger shadow on hover */
+  }
+
+  .faq-accordion{
+    padding: 15%;
+  }
+  
+  .search-bar-container {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 12% ;
+    opacity: 70%;
+  }
+
+  .search-results-container {
+    background-color: #f5f5f5; /* Light grey background */
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 8px; /* Rounded corners */
+    max-height: 300px; /* Maximum height */
+    overflow-y: auto; /* Scrollable */
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .search-result-item {
+    padding: 8px;
+    margin: 5px 0;
+    cursor: pointer; /* Change cursor on hover */
+    border-bottom: 1px solid #eee; /* Separator */
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .search-result-item:hover {
+    background-color: #eaeaea; /* Slight change on hover */
+  }
+
+  .article-card-image{
+    display: block; /* Treat image as block-level element */
+    margin-left: auto; /* Center image horizontally */
+    margin-right: auto;
+    width: 90%; /* Makes the image responsive and fit the container */
+    opacity: 90%;
+  }
+  
+  .card-container {
+    /* Use columns instead of grid */
+    column-count: 4; /* 4 columns for larger screens */
+    column-gap: 20px;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 5%;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .card-container {
+      column-count: 3; /* 3 columns for medium screens */
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .card-container {
+      column-count: 2; /* 2 columns for small screens */
+    }
+  
+    .search-bar-container {
+      width: 80%;
+      margin-top: 40%;
+      margin-bottom: 20%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .card-container {
+      column-count: 2; /* 1 column for extra small screens */
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+  
+
+.card-header-text {
+    text-align: left;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #FFFFFF;
+    font-size: small;
+  }
+
+.card-summary-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #FFFFFF;
+    font-size: small;
+}
+  
+  /* Add other styles as needed */
+  

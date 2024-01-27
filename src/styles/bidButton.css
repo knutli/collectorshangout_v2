@@ -1,0 +1,128 @@
+.button-85 {
+    padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255); 
+    background: #e07cdb;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 8px 0px 0px 8px;
+  }
+
+  .button-85:hover{
+    transform: translateY(-2px);
+  }
+
+  .button-85:active{
+    transform: translateY(1px);
+  }
+  
+  .button-85:before {
+    content: "";
+    background: linear-gradient(
+      45deg,
+      #ff6161,
+      #ffa963,
+      #fffd6c,
+      #98ff6f,
+      #91ffed,
+      #ff8ae6,
+      #ff8383
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+  }
+  
+  @keyframes glowing-button-85 {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 400% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+  
+  .button-85:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #238975;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+
+  .login-to-bid-notification{
+    color: gray;
+    font-size: small;
+    margin-top: 8px;
+  }
+
+.bid-info-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.bid-input-field{
+  width: 50%;
+}
+
+@media (max-width: 700px) {
+  .bid-input-field {
+    width: 100%;
+  }
+}
+
+.bid-button{
+  margin-top: 8px;
+}
+
+  /* THE BELOW STYLES ARE MOST LIKELY OUTDATED AND REPLACED BY NEXTUI */
+
+  .bid-info-input:disabled {
+    background-color: #e0e0e0;
+    color: #000000;
+    cursor: not-allowed;
+  }
+
+  /* Disabled bid button */
+  .button-85-disabled {
+    background: #e0e0e0; /* Or any other color indicating disabled state */
+    color: #a1a1a1; /* Or any other color indicating disabled state */
+    cursor: not-allowed;
+    animation: none; /* To stop any glowing or other effects */
+}
+
+  /* Override hover, active, before, and after states for disabled button */
+  .button-85-disabled:hover,
+  .button-85-disabled:active,
+  .button-85-disabled:before,
+  .button-85-disabled:after {
+      background: #e0e0e0; /* Maintain the disabled color */
+      color: #a1a1a1;
+      cursor: not-allowed;
+      transform: translateY(0px);
+
+  }
+  
+

@@ -6,12 +6,10 @@ import {
   Route,
 } from "react-router-dom";
 import { NextUIProvider } from "@nextui-org/react";
-// import { AuthProvider, useAuth } from "./routes/Auth";
 
 // Importing components
 import LandingPage from "./components/LandingPage";
 import Login from "./components/Login";
-import AuctionCreate from "./components/AuctionCreate";
 import AuctionView from "./components/auction/AuctionView";
 import MainContent from "./components/content/MainContent";
 import ArticlePage from "./components/content/ArticlePage";

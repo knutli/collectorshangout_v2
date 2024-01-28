@@ -36,7 +36,7 @@ const io = require("socket.io")(server, {
 });
 
 const admin = require("firebase-admin");
-const serviceAccount = require("../Collectors_Hangout_Firebase_Admin.json");
+const serviceAccount = require("./Collectors_Hangout_Firebase_Admin.json");
 
 // Initialize Firebase Admin with service account
 admin.initializeApp({

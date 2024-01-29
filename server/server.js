@@ -46,8 +46,7 @@ admin.initializeApp({
 // NEW LOGIN TEST
 var authRouter = require("./src/routes/auth2.js");
 
-app.use(
-  session({
+const sessionOptions = {
     store: new FirestoreStore({
       dataset: new Firestore({
         projectId: process.env.GOOGLE_PROJECT_ID,
@@ -58,8 +57,19 @@ app.use(
     secret: process.env.PASSPORT_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-  })
-);
+    cookie: {
+      secure: true, // to force https (set to true in production)
+      httpOnly: true, // to force httpOnly (improves security by not allowing client-side script access to the cookie)
+      sameSite: 'none', // this is the setting for cross-site access
+    }
+  };
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1); // trust first proxy
+  sessionOptions.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sessionOptions));
 
 app.use(passport.initialize());
 app.use(passport.session());

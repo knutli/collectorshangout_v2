@@ -23,9 +23,7 @@ router.get(
       res.status(500).send({ message: "Internal Server Error" });
     }
   }
-); */
-
-/*
+);
 // Check auth status
 router.get("/current_user", (req, res) => {
   if (req.isAuthenticated()) {
@@ -36,9 +34,6 @@ router.get("/current_user", (req, res) => {
     res.status(401).json({ message: "No authenticated user" }); // Send 401 if not authenticated
   }
 }); 
-*/
-
-/*
 
 // POST route to handle user data
 router.post("/", async (req, res) => {

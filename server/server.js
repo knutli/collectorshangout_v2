@@ -58,6 +58,10 @@ app.use(
     secret: process.env.PASSPORT_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: true,
+      sameSite: 'None',
+    }
   })
 );
 

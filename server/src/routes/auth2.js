@@ -15,8 +15,6 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const usersCollection = admin.firestore().collection("users");
-      console.log("profile.id is: ", profile.id);
-      console.log("the entire profile is: ", profile);
 
       // Ensure that profile.id is defined
       if (!profile.id) {

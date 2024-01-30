@@ -3,7 +3,7 @@ import { storage } from "../firebase-config.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { AuthContext } from "../AuthContext.js";
 import TempHeader from "./content/TempHeader.js";
-// import "../../src/styles/auctionCreate.css";
+import "../styles/auctioncreate.css";
 
 const AuctionCreateStepOne = ({ onNext, onCancel, previousData }) => {
   const { user } = useContext(AuthContext);

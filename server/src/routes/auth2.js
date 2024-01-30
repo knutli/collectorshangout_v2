@@ -1,17 +1,16 @@
 var express = require("express");
 var router = express.Router();
 const passport = require("passport");
-// var GoogleStrategy = require("passport-google-oidc");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 const admin = require("firebase-admin");
 
-// STRATEGY FOR GAMMEL OAUTH
+// STRATEGY FOR OAUTH
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/oauth2/redirect/google",
+      callbackURL: `${process.env.REACT_APP_BACKEND_URL}/oauth2/redirect/google`,
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -22,12 +21,6 @@ passport.use(
       // Ensure that profile.id is defined
       if (!profile.id) {
         return done(new Error("Profile ID is undefined"));
-
-        /* profile.id = "some-hardcoded-id-for-testing";
-        profile.displayName = "hardcoded name johnson";
-        profile.email = "hardcoded-test-email";
-        profile.photoURL =
-          "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg.com"; */
       }
 
       let userDoc = await usersCollection.doc(profile.id).get();
@@ -56,12 +49,7 @@ passport.use(
       }
     }
   )
-);
-
-/* router.get(
-  "/login",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-); */
+); 
 
 router.get("/login", (req, res) => {
   // In a full-stack app, you might render a server-side login page here.

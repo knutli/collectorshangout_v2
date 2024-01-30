@@ -66,7 +66,7 @@ router.get(
 router.get(
   "/oauth2/redirect/google",
   passport.authenticate("google", {
-    successRedirect: `${process.env.REACT_APP_FRONTEND_URL}`,
+    successRedirect: `${process.env.REACT_APP_FRONTEND_URL}/auctions`,
     failureRedirect: "/login",
   })
 );

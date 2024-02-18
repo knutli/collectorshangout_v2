@@ -52,8 +52,8 @@ const LandingPage = ({ isUserLoggedIn }) => {
 
   return (
     <div>
-          <div className="bg-blue-600 text-white text-center py-3">
-      <p>🚀 Bli med på reisen, og bli deleier! Vi folkefinansierer neste vekstfase på Dealflow. </p>
+          <div className="absolute top-4 left-4 right-4 bg-blue-600 text-white text-center py-2 rounded-lg shadow-md z-10">
+      <p>🚀 Bli med på reisen! Vi folkefinansierer neste vekstfase på Dealflow. </p>
     </div>
       {/* <TempHeader isUserLoggedIn={isUserLoggedIn} /> */}
       <div className="min-h-screen flex flex-col bg-black text-white relative bg-black text-white overflow-hidden">

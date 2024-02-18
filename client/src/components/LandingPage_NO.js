@@ -71,7 +71,7 @@ const LandingPage = ({ isUserLoggedIn }) => {
           <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl font-bold mb-6">
             Ekte
             <br />
-            nostalgi. TEEEEEEST
+            nostalgi.
             <br />
           </h1>
           <p className="mb-5 text-base md:text-lg sm:text-md">

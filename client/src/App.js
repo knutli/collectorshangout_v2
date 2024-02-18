@@ -9,6 +9,7 @@ import { NextUIProvider } from "@nextui-org/react";
 
 // Importing components
 import LandingPage from "./components/LandingPage";
+import LandingPage_NO from "./components/LandingPage_NO";
 import Login from "./components/Login";
 import AuctionView from "./components/auction/AuctionView";
 import MainContent from "./components/content/MainContent";
@@ -36,8 +37,8 @@ function App() {
           <ScrollToTop />
           <div className="App">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<LandingPage_NO />} />
+           {/*   <Route path="/login" element={<Login />} />
 
               <Route
                 path="/auctioncreate"
@@ -46,7 +47,7 @@ function App() {
                     <AuctionCreatev2 />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
 
               <Route path="/auction/:auctionId" element={<AuctionView />} />
               <Route path="/content" element={<MainContent />} />

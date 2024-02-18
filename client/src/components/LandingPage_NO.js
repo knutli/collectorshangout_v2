@@ -20,14 +20,14 @@ const LandingPage = ({ isUserLoggedIn }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!isValidEmail(email)) {
-      setMessage("Please input a valid email.");
+      setMessage("Vennligst bruk en gyldig e-postadresse.");
       return;
     }
     setButtonState("loading");
 
     try {
       await addDoc(collection(db, "waitlist"), { email });
-      setMessage("You're on the list!");
+      setMessage("Du er lagt til på ventelisten!");
       setTimeout(() => {
         setButtonState("completed");
         setTimeout(handleSuccess, 120000); // Synchronize message with checkmark
@@ -52,6 +52,9 @@ const LandingPage = ({ isUserLoggedIn }) => {
 
   return (
     <div>
+          <div className="absolute top-4 left-4 right-4 bg-blue-600 text-white text-center py-2 rounded-lg shadow-md z-10">
+      <p>🚀 Bli med på reisen! Vi folkefinansierer neste vekstfase på Dealflow. </p>
+    </div>
       {/* <TempHeader isUserLoggedIn={isUserLoggedIn} /> */}
       <div className="min-h-screen flex flex-col bg-black text-white relative bg-black text-white overflow-hidden">
         <div
@@ -59,26 +62,25 @@ const LandingPage = ({ isUserLoggedIn }) => {
           style={{
             paddingTop: "56.25%",
             backgroundImage:
-              "url('https://firebasestorage.googleapis.com/v0/b/collectors-hangout.appspot.com/o/Jersey%20Web%20App%20Background%20(1)..webp?alt=media&token=7fcf11f6-37c7-4151-ae42-05204e26683d')",
-            opacity: 0.9, // Opacity of BG image
+              "url('https://firebasestorage.googleapis.com/v0/b/collectors-hangout.appspot.com/o/background2%20(2).png?alt=media&token=f004e4e9-ff28-4166-956f-e4201fa9b700')",
+            opacity: 1, // Opacity of BG image
             backgroundPosition: "calc(50% + 180px) center",
           }}
         ></div>
         <div className="absolute inset-0 flex flex-col justify-center items-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-4rem]">
           <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl font-bold mb-6">
-            Collect.
+            Ekte
             <br />
-            Connect.
+            nostalgi.
             <br />
-            Complete.
           </h1>
           <p className="mb-5 text-base md:text-lg sm:text-md">
-            Build your collection, one auction win at a time.
+            Bygg din samling. En fotballtrøye om gangen.
             <br />
-            Welcome to the first ever community-powered marketplace 🦄
+            Velkommen til Norges første community-drevne markedsplass 🦄
             <br />
             <br />
-            <i>Coming 2024.</i>
+            <i>Kommer 2024.</i>
           </p>
           <div id="waitlist" className="mt-6">
             <form
@@ -87,13 +89,13 @@ const LandingPage = ({ isUserLoggedIn }) => {
             >
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Legg inn din epost"
                 className="px-4 py-2 rounded-md text-black"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <button type="submit" className={getButtonClassName()}>
-                {buttonState === "default" && "Join the waitlist!"}
+                {buttonState === "default" && "Meld din interesse!"}
                 {buttonState === "completed" && (
                   <i className="fa fa-check"></i>
                 )}{" "}

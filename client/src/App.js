@@ -38,7 +38,7 @@ function App() {
           <div className="App">
             <Routes>
               <Route path="/" element={<LandingPage_NO />} />
-              <Route path="/login" element={<Login />} />
+           {/*   <Route path="/login" element={<Login />} />
 
               <Route
                 path="/auctioncreate"
@@ -47,7 +47,7 @@ function App() {
                     <AuctionCreatev2 />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
 
               <Route path="/auction/:auctionId" element={<AuctionView />} />
               <Route path="/content" element={<MainContent />} />

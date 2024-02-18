@@ -52,7 +52,7 @@ const LandingPage = ({ isUserLoggedIn }) => {
 
   return (
   <div>
-    <div className="absolute top-4 left-4 right-4 bg-blue-600 text-white text-center py-2 rounded-lg font-bold shadow-md z-10">
+    <div className="absolute top-4 left-4 right-4 bg-blue-600 text-white text-center py-2 mb-12 rounded-lg font-bold shadow-md z-10">
       <p>🚀 Bli med på reisen! Vi folkefinansierer neste vekstfase på Dealflow. </p>
     </div>
       {/* <TempHeader isUserLoggedIn={isUserLoggedIn} /> */}
@@ -67,7 +67,7 @@ const LandingPage = ({ isUserLoggedIn }) => {
             backgroundPosition: "calc(50% + 180px) center",
           }}
         ></div>
-        <div className="absolute inset-0 flex flex-col justify-center items-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-4rem] sm:mt-[-2rem]">
+        <div className="absolute inset-0 flex flex-col justify-center items-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-4rem]">
           <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl  mb-6">
             Oase
           </h1>

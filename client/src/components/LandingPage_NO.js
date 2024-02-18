@@ -52,7 +52,7 @@ const LandingPage = ({ isUserLoggedIn }) => {
 
   return (
     <div>
-          <div className="absolute top-4 left-4 right-4 bg-blue-600 text-white text-center py-2 rounded-lg shadow-md z-10">
+          <div className="absolute top-4 left-4 right-4 bg-blue-600 text-white text-center py-2 rounded-lg font-bold shadow-md z-10">
       <p>🚀 Bli med på reisen! Vi folkefinansierer neste vekstfase på Dealflow. </p>
     </div>
       {/* <TempHeader isUserLoggedIn={isUserLoggedIn} /> */}
@@ -68,16 +68,20 @@ const LandingPage = ({ isUserLoggedIn }) => {
           }}
         ></div>
         <div className="absolute inset-0 flex flex-col justify-center items-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-4rem]">
-          <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl font-bold mb-6">
-            Ekte
-            <br />
-            nostalgi.
-            <br />
+          <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl  mb-6">
+            Oase
           </h1>
+          <br />
+          <br />
+          <br />
+
+          <p className="text-xl md:text-2xl lg:text-3xl font-semibold mb-4">
+            Autentiske trøyer. Ekte nostalgi.
+          </p>
           <p className="mb-5 text-base md:text-lg sm:text-md">
-            Bygg din samling. En fotballtrøye om gangen.
+            Oppdag autentiske trøyer i Norges første community-drevne markedsplass 🦄
             <br />
-            Velkommen til Norges første community-drevne markedsplass 🦄
+            Bygg samlingen din. En trøye av gangen. 
             <br />
             <br />
             <i>Kommer 2024.</i>
@@ -95,7 +99,7 @@ const LandingPage = ({ isUserLoggedIn }) => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <button type="submit" className={getButtonClassName()}>
-                {buttonState === "default" && "Meld din interesse!"}
+                {buttonState === "default" && "Hold meg oppdatert!"}
                 {buttonState === "completed" && (
                   <i className="fa fa-check"></i>
                 )}{" "}

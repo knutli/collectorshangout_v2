@@ -68,7 +68,7 @@ const LandingPage = ({ isUserLoggedIn }) => {
           }}
         ></div>
         <div className="absolute inset-0 flex flex-col justify-center items-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-4rem]">
-          <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl  mb-6">
+          <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl mb-4 mt-12">
             Oase
           </h1>
           <br />

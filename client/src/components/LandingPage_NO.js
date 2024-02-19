@@ -64,8 +64,8 @@ const LandingPage = ({ isUserLoggedIn }) => {
             backgroundImage:
               "url('https://firebasestorage.googleapis.com/v0/b/collectors-hangout.appspot.com/o/background2%20(2).png?alt=media&token=f004e4e9-ff28-4166-956f-e4201fa9b700')",
             opacity: 1, // Opacity of BG image
-            backgroundPosition: "calc(50% + 180px) center",
-          }}
+           /* backgroundPosition: "calc(50% + 180px) center", */
+          }} 
         ></div>
         <div className="absolute inset-0 flex flex-col justify-center items-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-4rem]">
           <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl mb-4 mt-12">

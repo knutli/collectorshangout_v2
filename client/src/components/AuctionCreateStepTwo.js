@@ -24,7 +24,10 @@ const AuctionCreateStepTwo = ({ onBack, onCancel, previousData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const fullAuctionData = { ...previousData, ...additionalData };
+      // Convert endTime to a Firestore Timestamp
+      const endTime = new Date(additionalData.endTime).toISOString();
+      // Create the full auction data object including the converted endTime
+      const fullAuctionData = { ...previousData, ...additionalData, endTime: endTime, };
 
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/auctions`,
@@ -34,7 +37,7 @@ const AuctionCreateStepTwo = ({ onBack, onCancel, previousData }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(fullAuctionData),
-          credentials: "include", // Ensure cookies are included with the request
+         credentials: "include", // Ensure cookies are included with the request
         }
       );
 

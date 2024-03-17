@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { app } from "../firebase-config"; // assuming app is exported from firebase-config
+import { app } from "../firebase-config"; 
 import TempHeader from "./content/TempHeader";
 
 const LandingPage = ({ isUserLoggedIn }) => {
@@ -52,7 +52,7 @@ const LandingPage = ({ isUserLoggedIn }) => {
 
   return (
     <div>
-      {/* <TempHeader isUserLoggedIn={isUserLoggedIn} /> */}
+     <TempHeader isUserLoggedIn={isUserLoggedIn} />
       <div className="min-h-screen flex flex-col bg-black text-white relative bg-black text-white overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-no-repeat responsive-bg"

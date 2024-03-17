@@ -30,6 +30,10 @@ const TempHeader = ({ isBlackText }) => {
             Hjem
           </Link>
 
+          <Link to="/auctions" className="hover:text-gray-300">
+            Auksjoner
+          </Link>
+
           <Link to="/content" className="hover:text-gray-300">
             Blogg
           </Link>

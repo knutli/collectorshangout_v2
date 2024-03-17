@@ -18,6 +18,7 @@ import FAQModal from "./components/content/FAQModal";
 import { AuthProvider } from "./AuthContext";
 import AuctionCreatev2 from "./components/AuctionCreatev2";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AuctionsPage from "./components/auction/AuctionsPage";
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -37,18 +38,17 @@ function App() {
           <ScrollToTop />
           <div className="App">
             <Routes>
-              <Route path="/" element={<LandingPage_NO />} />
-           {/*   <Route path="/login" element={<Login />} />
-
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
               <Route
                 path="/auctioncreate"
                 element={
                   <ProtectedRoute>
                     <AuctionCreatev2 />
-                  </ProtectedRoute>
+                   </ProtectedRoute> 
                 }
-              /> */}
-
+              />
+              <Route path="/auctions" element={<AuctionsPage />} />
               <Route path="/auction/:auctionId" element={<AuctionView />} />
               <Route path="/content" element={<MainContent />} />
               <Route path="/content/articles/:id" element={<ArticlePage />} />

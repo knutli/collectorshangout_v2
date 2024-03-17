@@ -97,8 +97,8 @@
     /* Use columns instead of grid */
     column-count: 4; /* 4 columns for larger screens */
     column-gap: 20px;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
     padding-top: 5%;
   }
 

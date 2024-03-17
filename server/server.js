@@ -4,8 +4,11 @@ const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
+const cookieParser = require('cookie-parser');
 const { Firestore } = require("@google-cloud/firestore");
 const { FirestoreStore } = require("@google-cloud/connect-firestore");
+const authenticateToken = require("./middleware/authenticateToken");
+
 
 const app = express();
 
@@ -24,6 +27,8 @@ app.use(cors({
 // Middleware to parse JSON and urlencoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 
 const http = require("http"); // Required for Socket.IO
 const port = process.env.SERVER_PORT || 3000; // The 3000 is a default if process.env.PORT is not set
@@ -44,7 +49,7 @@ admin.initializeApp({
 });
 
 // NEW LOGIN TEST
-var authRouter = require("./src/routes/auth2.js");
+const authRouter = require("./src/routes/auth2.js");
 
 const sessionOptions = {
     store: new FirestoreStore({
@@ -74,30 +79,6 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// DENNE HØRER TIL passport strategy OAUTH 2.0
-/* app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile"] })
-); */
-
-app.get(
-  "/oauth2/redirect/google",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  function (req, res) {
-    // Successful authentication, redirect home.
-    res.redirect(`${process.env.REACT_APP_FRONTEND_URL}`);
-  }
-);
-
-// Check current user
-app.get("/current_user", (req, res) => {
-  if (req.user) {
-    res.send({ user: req.user });
-  } else {
-    res.send({ user: null });
-  }
-});
-
 app.get("/", (req, res) => {
   if (!req.session.views) {
     req.session.views = 0;
@@ -113,9 +94,9 @@ const auctionRoutes = require("./src/routes/auctions.js")(io);
 const userRoutes = require("./src/routes/userRoutes.js");
 
 // Routes requiring authentication
-app.post("/api/auctions", auctionRoutes.createAuction);
+app.post("/api/auctions", authenticateToken, auctionRoutes.createAuction);
 //app.put("/api/auctions/:auctionId", auctionRoutes.updateAuction);
-app.post("/api/auctions/:auctionId/bid", auctionRoutes.placeBid);
+app.post("/api/auctions/:auctionId/bid", authenticateToken, auctionRoutes.placeBid);
 // User routes
 app.use("/api/users", userRoutes);
 

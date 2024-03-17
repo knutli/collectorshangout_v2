@@ -6,29 +6,30 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const checkUserSession = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/current_user`,
-          {
-            credentials: "include",
-          }
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data.user);
-        } else {
-          // If the response is not OK, assume no user is logged in
-          setUser(null);
-        }
-      } catch (error) {
-        console.error("Error checking user session:", error);
-        setUser(null);
-      }
-    };
-
-    checkUserSession();
+    fetchCurrentUser();
   }, []);
+
+  const fetchCurrentUser = async () => {
+    try {
+      // Include credentials to send the HttpOnly cookie with the request
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/current_user`,
+        {
+          credentials: 'include', // Necessary to include the HttpOnly cookie in the request
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.user); // This should set the user info in context
+      } else {
+        setUser(null); // Clear user context if not authenticated
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setUser(null);
+    }
+  };
+  
 
   const signIn = async (userData) => {
     try {
@@ -60,10 +61,17 @@ export const AuthProvider = ({ children }) => {
   const signOut = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/logout`
+        `${process.env.REACT_APP_BACKEND_URL}/logout`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       if (response.ok) {
         setUser(null);
+        localStorage.removeItem("token");
       } else {
         throw new Error("Logout failed");
       }

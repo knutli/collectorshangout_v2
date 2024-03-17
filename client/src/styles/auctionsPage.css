@@ -1,0 +1,74 @@
+/* CSS in auctionsPage.css */
+/* CSS in auctionsPage.css */
+.auctions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-gap: 1rem;
+    margin: auto; /* Center the grid */
+    max-width: 1200px; /* Adjust the max-width to control the card size */
+  }
+  
+  @media (max-width: 1200px) {
+    .auctions-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .auctions-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .auctions-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+
+.card-container {
+    column-count: 3;
+    column-gap: 20px;
+    padding: 5% 10%;
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .card-container {
+      column-count: 3;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .card-container {
+      column-count: 2;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .card-container {
+      column-count: 1;
+    }
+  }
+
+  .cards {
+    margin-top: 2rem;
+  }
+
+  .cards-footer-text-container {
+    text-align: left;
+  }
+
+  .auctions-page-container {
+    margin-top: 10rem;
+    padding: 0 10%;
+  }
+
+
+
+  .search-filter {
+    flex: 1;
+    margin-right: 12px;
+  }
+
+

@@ -1,0 +1,26 @@
+.main-section {
+    width: 100%;
+}
+
+.intro-section,
+.features-section,
+.testimonials-section,
+.cta-section {
+    padding: 50px 20px;
+}
+
+.features-section {
+    display: flex;
+    background-color: #f7f7f7;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.testimonials-section,
+.cta-section {
+    text-align: center;
+}
+
+.cta-section {
+    background-color: #f0f0f0;
+}

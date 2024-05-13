@@ -4,10 +4,7 @@ import { Button } from "@nextui-org/react";
 
 function Login() {
   const handleLogin = () => {
-    // Redirect to the server's authentication route
-    // window.location.href = `https://collectors-hangout.ew.r.appspot.com/login/federated/google`;
     window.location.href = `${process.env.REACT_APP_BACKEND_URL}/login/federated/google`;
-    // window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/google`;
   };
 
   const googleLoginButtonUrl =

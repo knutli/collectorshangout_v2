@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { storage } from "../firebase-config.js";
+import { storage } from "../../firebase-config.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { AuthContext } from "../AuthContext.js";
-import TempHeader from "./content/TempHeader.js";
-import "../styles/auctioncreate.css";
+import { AuthContext } from "../../AuthContext.js";
+import TempHeader from "../TempHeader.js";
+import "../../styles/auctioncreate.css";
 import { SIZES, CONDITIONS, COUNTRIES } from "./AuctionCreateConstants.js";
 
 const AuctionCreateStepOne = ({ onNext, onCancel, previousData }) => {
@@ -86,7 +86,7 @@ const AuctionCreateStepOne = ({ onNext, onCancel, previousData }) => {
           {/* Left Column for input fields */}
           <div className="form-column">
             {/* Repeat pattern for input fields, using class names */}
-            
+
             {/* Title */}
             <div className="form-group">
               <label htmlFor="title" className="form-label">
@@ -162,7 +162,7 @@ const AuctionCreateStepOne = ({ onNext, onCancel, previousData }) => {
                 trøyens front, bakside, samt innvendig lapp.
               </span>
             </div>
-            
+
             {/* Size */}
             <div className="form-group">
               <label htmlFor="size" className="form-label">
@@ -174,7 +174,7 @@ const AuctionCreateStepOne = ({ onNext, onCancel, previousData }) => {
                 onChange={handleChange}
                 className="form-input"
               >
-                {SIZES.map(size => (
+                {SIZES.map((size) => (
                   <option key={size} value={size}>
                     {size}
                   </option>
@@ -196,7 +196,7 @@ const AuctionCreateStepOne = ({ onNext, onCancel, previousData }) => {
                 onChange={handleChange}
                 className="form-input"
               >
-                {CONDITIONS.map(condition => (
+                {CONDITIONS.map((condition) => (
                   <option key={condition} value={condition}>
                     {condition}
                   </option>
@@ -209,10 +209,8 @@ const AuctionCreateStepOne = ({ onNext, onCancel, previousData }) => {
             </div>
           </div>
 
-
           {/* Right Column for image upload and tags */}
           <div className="form-column">
-
             {/* Team */}
             <div className="form-group">
               <label htmlFor="team" className="form-label">
@@ -277,14 +275,14 @@ const AuctionCreateStepOne = ({ onNext, onCancel, previousData }) => {
                 onChange={handleChange}
                 className="form-input"
               >
-                {COUNTRIES.map(country => (
+                {COUNTRIES.map((country) => (
                   <option key={country} value={country}>
                     {country}
                   </option>
                 ))}
               </select>
               <span className="input-form-helper-text">
-              Legg inn hvilket land trøyen kommer fra.
+                Legg inn hvilket land trøyen kommer fra.
               </span>
             </div>
 

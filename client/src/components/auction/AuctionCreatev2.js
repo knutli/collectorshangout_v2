@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { storage } from "../firebase-config.js";
+import { storage } from "../../firebase-config.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import AuctionCreateStepOne from "./AuctionCreateStepOne.js";
 import AuctionCreateStepTwo from "./AuctionCreateStepTwo.js";

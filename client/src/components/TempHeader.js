@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../AuthContext";
+import { AuthContext } from "../AuthContext";
 import {
   Dropdown,
   DropdownTrigger,
@@ -8,7 +8,7 @@ import {
   DropdownItem,
   Avatar,
 } from "@nextui-org/react";
-import "../../styles/header.css";
+import "../styles/header.css";
 
 const TempHeader = ({ isBlackText }) => {
   const { user, signOut } = useContext(AuthContext);
@@ -43,17 +43,17 @@ const TempHeader = ({ isBlackText }) => {
               <DropdownTrigger>
                 <Avatar
                   size="sm"
-                  radius="md"
+                  radius="xl"
                   isBordered
                   as="button"
                   className="transition-transform"
-                  src={user.photoURL} // Use the user's photo URL
+                  src={user.photoURL}
                 />
               </DropdownTrigger>
               <DropdownMenu
                 aria-label="Profile Actions"
                 variant="flat"
-                disabledKeys={["profile", "settings"]}
+                disabledKeys={["settings"]}
               >
                 <DropdownItem key="info" className="h-14 gap-2">
                   <p className="font-semibold">Innlogget som</p>

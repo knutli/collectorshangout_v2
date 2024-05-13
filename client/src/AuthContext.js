@@ -4,6 +4,7 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCurrentUser();
@@ -11,25 +12,24 @@ export const AuthProvider = ({ children }) => {
 
   const fetchCurrentUser = async () => {
     try {
-      // Include credentials to send the HttpOnly cookie with the request
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/current_user`,
-        {
-          credentials: 'include', // Necessary to include the HttpOnly cookie in the request
-        }
+        { credentials: "include" }
       );
       if (response.ok) {
         const data = await response.json();
-        setUser(data.user); // This should set the user info in context
+        setUser(data.user);
       } else {
-        setUser(null); // Clear user context if not authenticated
+        console.log("No user data returned"); // Log if no data returned
+        setUser(null);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
       setUser(null);
+    } finally {
+      setLoading(false);
     }
   };
-  
 
   const signIn = async (userData) => {
     try {
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, isLoading, setUser, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

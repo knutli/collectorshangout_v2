@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../AuthContext";
-import TempHeader from "./content/TempHeader";
+import { AuthContext } from "../../AuthContext";
+import TempHeader from "../TempHeader";
 
 const AuctionCreateStepTwo = ({ onBack, onCancel, previousData }) => {
   const { user } = useContext(AuthContext);
@@ -27,7 +27,11 @@ const AuctionCreateStepTwo = ({ onBack, onCancel, previousData }) => {
       // Convert endTime to a Firestore Timestamp
       const endTime = new Date(additionalData.endTime).toISOString();
       // Create the full auction data object including the converted endTime
-      const fullAuctionData = { ...previousData, ...additionalData, endTime: endTime, };
+      const fullAuctionData = {
+        ...previousData,
+        ...additionalData,
+        endTime: endTime,
+      };
 
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/auctions`,
@@ -37,7 +41,7 @@ const AuctionCreateStepTwo = ({ onBack, onCancel, previousData }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(fullAuctionData),
-         credentials: "include", // Ensure cookies are included with the request
+          credentials: "include", // Ensure cookies are included with the request
         }
       );
 

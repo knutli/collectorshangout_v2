@@ -16,9 +16,16 @@ import MainContent from "./components/content/MainContent";
 import ArticlePage from "./components/content/ArticlePage";
 import FAQModal from "./components/content/FAQModal";
 import { AuthProvider } from "./AuthContext";
-import AuctionCreatev2 from "./components/AuctionCreatev2";
+import AuctionCreatev2 from "./components/auction/AuctionCreatev2";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuctionsPage from "./components/auction/AuctionsPage";
+import Profil from "./components/profile/Profil";
+import Collection from "./components/profile/Collection";
+import Activity from "./components/profile/Activity";
+import Notifications from "./components/profile/Notifications";
+import Billing from "./components/profile/Billing";
+import DeleteAccount from "./components/profile/DeleteAccount";
+import ProfileArea from "./components/profile/ProfileArea";
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -45,7 +52,7 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <AuctionCreatev2 />
-                   </ProtectedRoute> 
+                  </ProtectedRoute>
                 }
               />
               <Route path="/auctions" element={<AuctionsPage />} />
@@ -53,6 +60,12 @@ function App() {
               <Route path="/content" element={<MainContent />} />
               <Route path="/content/articles/:id" element={<ArticlePage />} />
               <Route path="/content/faq" element={<FAQModal />} />
+              <Route path="/profile" element={<Profil />} />
+              <Route path="/collection" element={<Collection />} />
+              <Route path="/activity" element={<Activity />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/billing" element={<Billing />} />
+              <Route path="/delete-account" element={<DeleteAccount />} />
             </Routes>
           </div>
         </Router>

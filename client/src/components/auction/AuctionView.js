@@ -9,7 +9,7 @@ import AuctionDescription from "./AuctionDescription";
 import CountdownTimer from "./CountdownTimer";
 import CurrentBid from "./CurrentBid";
 import BidHistory from "./BidHistory";
-import TempHeader from "../content/TempHeader";
+import TempHeader from "../TempHeader";
 import { AuthContext } from "../../AuthContext";
 import "../../styles/auctionView.css";
 

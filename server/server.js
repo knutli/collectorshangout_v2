@@ -4,11 +4,10 @@ const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const { Firestore } = require("@google-cloud/firestore");
 const { FirestoreStore } = require("@google-cloud/connect-firestore");
 const authenticateToken = require("./middleware/authenticateToken");
-
 
 const app = express();
 
@@ -18,17 +17,17 @@ const app = express();
   cors({ origin: `${process.env.REACT_APP_FRONTEND_URL}`, credentials: true })
 ); */
 
-app.use(cors({ 
-  origin: [`${process.env.REACT_APP_FRONTEND_URL}`, 'http://localhost:3001'],
-  credentials: true 
-}));
-
+app.use(
+  cors({
+    origin: [`${process.env.REACT_APP_FRONTEND_URL}`, "http://localhost:3001"],
+    credentials: true,
+  })
+);
 
 // Middleware to parse JSON and urlencoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
 
 const http = require("http"); // Required for Socket.IO
 const port = process.env.SERVER_PORT || 3000; // The 3000 is a default if process.env.PORT is not set
@@ -52,25 +51,25 @@ admin.initializeApp({
 const authRouter = require("./src/routes/auth2.js");
 
 const sessionOptions = {
-    store: new FirestoreStore({
-      dataset: new Firestore({
-        projectId: process.env.GOOGLE_PROJECT_ID,
-        keyFilename: "Collectors_Hangout_Firebase_Admin.json",
-      }),
-      kind: "express-sessions",
+  store: new FirestoreStore({
+    dataset: new Firestore({
+      projectId: process.env.GOOGLE_PROJECT_ID,
+      keyFilename: "Collectors_Hangout_Firebase_Admin.json",
     }),
-    secret: process.env.PASSPORT_SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: true, // to force https (set to true in production)
-      httpOnly: true, // to force httpOnly (improves security by not allowing client-side script access to the cookie)
-      sameSite: 'none', // this is the setting for cross-site access
-    }
-  };
+    kind: "express-sessions",
+  }),
+  secret: process.env.PASSPORT_SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: true, // to force https (set to true in production)
+    httpOnly: true, // to force httpOnly (improves security by not allowing client-side script access to the cookie)
+    sameSite: "none", // this is the setting for cross-site access
+  },
+};
 
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1); // trust first proxy
+if (app.get("env") === "production") {
+  app.set("trust proxy", 1); // trust first proxy
   sessionOptions.cookie.secure = true; // serve secure cookies
 }
 
@@ -96,7 +95,12 @@ const userRoutes = require("./src/routes/userRoutes.js");
 // Routes requiring authentication
 app.post("/api/auctions", authenticateToken, auctionRoutes.createAuction);
 //app.put("/api/auctions/:auctionId", auctionRoutes.updateAuction);
-app.post("/api/auctions/:auctionId/bid", authenticateToken, auctionRoutes.placeBid);
+app.post(
+  "/api/auctions/:auctionId/bid",
+  authenticateToken,
+  auctionRoutes.placeBid
+);
+
 // User routes
 app.use("/api/users", userRoutes);
 

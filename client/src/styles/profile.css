@@ -1,0 +1,107 @@
+.profile-container {
+    display: flex;
+    height: 100vh;
+}
+
+.profile-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    margin-top: 120px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+.profile-section {
+    background-color: #ffffff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.profile-section h2 {
+    margin-bottom: 10px;
+    margin-left: 8px;
+}
+  
+.profile-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  
+    gap: 4px 20px;  
+    margin-bottom: 20px;
+    width: 60%;
+}
+
+@media (max-width: 600px) {
+    .profile-info-grid {
+        grid-template-columns: 1fr;  /* Switch to single column */
+        width: 100%;  /* Optional: take full width of container on smaller screens */
+    }
+}
+
+.profile-info-field {
+    color: #919191;
+}
+
+.profile-info-field p{
+    font-weight: 600;
+    margin-top: 4px;
+}
+  
+.profile-info-grid div {
+    background-color: #ffffff;
+    padding: 4px 8px 4px 8px;
+    border-radius: 8px;
+}
+
+.profile-image-container {
+    position: relative;
+    cursor: pointer;
+    padding-left: 12px;
+ }
+  
+.profile-image-container:hover .profile-image {
+    filter: brightness(70%);
+}
+  
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile_edit_input{
+    width: 90%;
+    margin-top: 8px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    padding: 8px 12px 8px 12px;
+    background-color: #ffffff;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+    transition: 300ms ease-in-out;
+}
+  
+.profile_edit_input:focus {
+    background-color: white;
+    transform: scale(1.05);
+    box-shadow: 9px 9px 50px #d2d2d2,
+               -9px -9px 50px #ffffff;
+  }
+
+
+  

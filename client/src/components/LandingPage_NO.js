@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { app } from "../firebase-config"; // assuming app is exported from firebase-config
-import TempHeader from "./content/TempHeader";
+import TempHeader from "./TempHeader";
 
 const LandingPage = ({ isUserLoggedIn }) => {
   const [email, setEmail] = useState("");
@@ -51,10 +51,12 @@ const LandingPage = ({ isUserLoggedIn }) => {
   };
 
   return (
-  <div>
-    <div className="absolute top-4 left-4 right-4 bg-blue-600 text-white text-center py-2 mb-12 rounded-lg font-bold shadow-md z-10">
-      <p>🚀 Bli med på reisen! Vi folkefinansierer neste vekstfase på Dealflow. </p>
-    </div>
+    <div>
+      <div className="absolute top-4 left-4 right-4 bg-blue-600 text-white text-center py-2 mb-12 rounded-lg font-bold shadow-md z-10">
+        <p>
+          🚀 Bli med på reisen! Vi folkefinansierer neste vekstfase på Dealflow.{" "}
+        </p>
+      </div>
       {/* <TempHeader isUserLoggedIn={isUserLoggedIn} /> */}
       <div className="min-h-screen flex flex-col bg-black text-white relative bg-black text-white overflow-hidden">
         <div
@@ -64,8 +66,8 @@ const LandingPage = ({ isUserLoggedIn }) => {
             backgroundImage:
               "url('https://firebasestorage.googleapis.com/v0/b/collectors-hangout.appspot.com/o/background2%20(2).png?alt=media&token=f004e4e9-ff28-4166-956f-e4201fa9b700')",
             opacity: 1, // Opacity of BG image
-           /* backgroundPosition: "calc(50% + 180px) center", */
-          }} 
+            /* backgroundPosition: "calc(50% + 180px) center", */
+          }}
         ></div>
         <div className="absolute inset-0 flex flex-col justify-center items-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-4rem]">
           <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl mb-4 mt-12">
@@ -79,9 +81,10 @@ const LandingPage = ({ isUserLoggedIn }) => {
             Autentiske trøyer. Ekte nostalgi.
           </p>
           <p className="mb-5 text-base md:text-lg sm:text-md">
-            Oppdag autentiske trøyer i Norges første community-drevne markedsplass 🦄
+            Oppdag autentiske trøyer i Norges første community-drevne
+            markedsplass 🦄
             <br />
-            Bygg samlingen din. En trøye av gangen. 
+            Bygg samlingen din. En trøye av gangen.
             <br />
             <br />
             <i>Kommer 2024.</i>

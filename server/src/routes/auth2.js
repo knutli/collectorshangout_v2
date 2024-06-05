@@ -4,6 +4,8 @@ const passport = require("passport");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 const admin = require("firebase-admin");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { v4: uuidv4 } = require("uuid");
 
 /**
  * Generates a JWT for a given user.
@@ -11,26 +13,22 @@ const jwt = require("jsonwebtoken");
  * @returns {String} The generated JWT.
  */
 function generateToken(user) {
-  // Ensure you have a unique identifier for the user in your user object
-  const userId = user.uid; // This could be any unique attribute from your user model
+  const userId = user.uid;
 
-  // Define the payload for the JWT
   const payload = {
-    sub: userId, // Subject (whom the token is about)
-    iat: Math.floor(Date.now() / 1000), // Issued at time
-    exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24, // Expiration time (24 hours from issue)
-    // You can add other claims here as needed
+    sub: userId,
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
   };
 
-  // Generate the JWT
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    algorithm: "HS256", // Use HS256 algorithm for signing the token
+    algorithm: "HS256",
   });
 
   return token;
 }
 
-// STRATEGY FOR OAUTH
+// Google OAuth strategy
 passport.use(
   new GoogleStrategy(
     {
@@ -42,75 +40,71 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       const usersCollection = admin.firestore().collection("users");
 
-      // Ensure that profile.id is defined
       if (!profile.id) {
         return done(new Error("Profile ID is undefined"));
       }
 
-      let userDoc = await usersCollection.doc(profile.id).get();
-      let user;
+      try {
+        let userDoc = await usersCollection.doc(profile.id).get();
+        let user;
 
-      if (!userDoc.exists) {
-        // Extract email and photoURL correctly
-        const email =
-          profile.emails && profile.emails.length > 0
-            ? profile.emails[0].value
-            : null;
-        const photoURL =
-          profile.photos && profile.photos.length > 0
-            ? profile.photos[0].value
-            : null;
+        if (!userDoc.exists) {
+          const email = profile.emails?.[0]?.value || null;
+          const photoURL = profile.photos?.[0]?.value || null;
 
-        const newUser = {
-          uid: profile.id,
-          displayName: profile.displayName,
-          email: email,
-          photoURL: photoURL,
-        };
-        await usersCollection.doc(profile.id).set(newUser);
-        user = newUser;
-      } else {
-        user = userDoc.data(); // Existing user found
+          const newUser = {
+            uid: profile.id,
+            displayName: profile.displayName,
+            email: email,
+            photoURL: photoURL,
+          };
+          await usersCollection.doc(profile.id).set(newUser);
+          user = newUser;
+        } else {
+          user = userDoc.data();
+        }
+
+        const token = generateToken(user);
+        user.token = token;
+
+        done(null, user);
+      } catch (error) {
+        done(error);
       }
-
-      // Generate token for the user (new or existing)
-      const token = generateToken(user);
-
-      // Now, you can attach the token to the user object or handle it as per your requirement
-      // For example, add the token to the user object that will be passed to done()
-      user.token = token;
-
-      done(null, user); // Pass the modified user object with the token to the next step
     }
   )
 );
 
 router.get("/login", (req, res) => {
-  res.redirect(`${process.env.REACT_APP_FRONTEND_URL}/login`); // Redirect to the React app's login page
+  res.redirect(`${process.env.REACT_APP_FRONTEND_URL}/login`);
 });
 
-// GAMLE ROUTES
 router.get(
   "/login/federated/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    session: false,
+  })
 );
 
 router.get(
   "/oauth2/redirect/google",
-  passport.authenticate("google", { failureRedirect: "/login" }),
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    session: false,
+  }),
   (req, res) => {
-    // The user object now includes the token
     if (req.user && req.user.token) {
-      // Option 1: Send token via secure, HttpOnly cookie (secure method, recommended for immediate extraction by SPA)
       res.cookie("temporary_auth_token", req.user.token, {
         httpOnly: true,
-        secure: true,
-        sameSite: "Lax",
+        secure: false, // Ensure this is false for localhost
+        sameSite: "Lax", // Use SameSite=Lax for local development
+        path: "/", // Explicitly set path to root
         maxAge: 60 * 60 * 24 * 1000,
-      }); // 1 day expiry
+      });
+      console.log("Cookie set with JWT:", req.user.token);
       res.redirect(`${process.env.REACT_APP_FRONTEND_URL}`);
     } else {
-      // Handle error or invalid state
       res.redirect(
         `${process.env.REACT_APP_FRONTEND_URL}/login?error=authentication_failed`
       );
@@ -118,29 +112,29 @@ router.get(
   }
 );
 
-// Endpoint to check current user and return user data based on the JWT
-router.get("/current_user", (req, res) => {
-  console.log("current_user endpoint hit");
-  const token = req.cookies["temporary_auth_token"]; // Adjust based on your cookie name
+router.get("/current_user", async (req, res) => {
+  const token = req.cookies["temporary_auth_token"];
 
   if (!token) {
+    console.error("No token found in cookies");
     return res.send({ user: null });
   }
 
-  // Verify JWT token
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
+      console.error("JWT verification error:", err);
       return res.status(401).send({ user: null });
     }
 
-    const uid = decoded.sub; // Make sure 'sub' is the property where the UID is stored
+    const uid = decoded.sub;
     if (!uid) {
+      console.error("Invalid token: missing UID");
       return res.status(401).send({ message: "Invalid token" });
     }
 
     const usersCollection = admin.firestore().collection("users");
     try {
-      const userDoc = await usersCollection.doc(uid).get(); // uid must be a non-empty string
+      const userDoc = await usersCollection.doc(uid).get();
 
       if (!userDoc.exists) {
         return res.status(404).send({ message: "User not found" });
@@ -154,45 +148,88 @@ router.get("/current_user", (req, res) => {
   });
 });
 
-router.get("/logout", function (req, res) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
+router.get("/logout", (req, res) => {
+  res.clearCookie("temporary_auth_token");
+  res.redirect("/");
+});
+
+// Register new user with username and password
+router.post("/register", async (req, res) => {
+  const { username, password } = req.body;
+  const usersCollection = admin.firestore().collection("users");
+
+  try {
+    let userDoc = await usersCollection.where("email", "==", username).get();
+    if (!userDoc.empty) {
+      return res.status(400).send({ message: "Username already exists" });
     }
-    req.session.destroy(function (err) {
-      if (err) {
-        console.log(err); // Handle the error if the session wasn't destroyed properly
-      }
-      res.clearCookie("connect.sid"); // The name of your session cookie
-      res.redirect("/"); // Redirect after logging out
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = {
+      uid: uuidv4(), // Generate a unique UID
+      displayName: username,
+      email: username,
+      photoURL: "https://via.placeholder.com/150", // Placeholder image URL
+      password: hashedPassword,
+    };
+    await usersCollection.doc(newUser.uid).set(newUser);
+
+    const token = generateToken(newUser);
+    console.log("Generated JWT token for registration:", token);
+    res.cookie("temporary_auth_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Lax",
+      maxAge: 60 * 60 * 24 * 1000,
     });
-  });
+    console.log("Cookie set with JWT:", token);
+
+    res.status(201).send({ user: newUser });
+  } catch (error) {
+    console.error("Error registering new user:", error);
+    res.status(500).send({ message: "Error registering new user" });
+  }
 });
 
-// passport.serializeUser((user, done) => {
-//   process.nextTick(() => {
-//     console.log('user is: ', user);
-//     done(null, user.uid); // Assuming 'uid' is the unique identifier for your user
-//   });
-// });
+// Login user with username and password
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const usersCollection = admin.firestore().collection("users");
 
-passport.serializeUser((id, done) => {
-  done(null, id); // Directly use the ID for serialization
-});
-
-passport.deserializeUser(async (id, done) => {
-  process.nextTick(async () => {
-    try {
-      const usersCollection = admin.firestore().collection("users");
-      const userDoc = await usersCollection.doc(id).get();
-      if (!userDoc.exists) {
-        return done(null, false); // User not found
-      }
-      return done(null, userDoc.data()); // Return user data
-    } catch (error) {
-      return done(error);
+  try {
+    const userQuery = await usersCollection
+      .where("email", "==", username)
+      .get();
+    if (userQuery.empty) {
+      console.error("Invalid username or password: user not found");
+      return res.status(400).send({ message: "Invalid username or password" });
     }
-  });
+
+    const userDoc = userQuery.docs[0];
+    const user = userDoc.data();
+
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      console.error("Invalid username or password: incorrect password");
+      return res.status(400).send({ message: "Invalid username or password" });
+    }
+
+    const token = generateToken(user);
+    console.log("Generated JWT token for login:", token);
+    res.cookie("temporary_auth_token", token, {
+      httpOnly: true,
+      secure: false, // Ensure this is false for localhost
+      sameSite: "Lax", // Use SameSite=Lax for local development
+      path: "/", // Explicitly set path to root
+      maxAge: 60 * 60 * 24 * 1000,
+    });
+    console.log("Cookie set with JWT:", token);
+
+    res.status(200).send({ user });
+  } catch (error) {
+    console.error("Error logging in user:", error);
+    res.status(500).send({ message: "Error logging in user" });
+  }
 });
 
 module.exports = router;

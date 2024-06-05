@@ -5,6 +5,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// Mock process for the browser environment to avoid "process is not defined error in browser"
+if (typeof process === "undefined") {
+  window.process = {
+    env: {
+      NODE_ENV: "development", // or 'production'
+      // Add other environment variables here as needed
+    },
+  };
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 

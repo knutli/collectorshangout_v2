@@ -3,7 +3,7 @@ import FuzzySearchBar from "./FuzzySearchBar";
 import ArticleCard from "./ArticleCard";
 import sampleArticles from "./Articles";
 import "../../styles/content.css";
-import TempHeader from "../TempHeader";
+import TempHeader from "../general/navbar/TempHeader";
 
 const MainContent = () => {
   const [articles] = useState(sampleArticles);

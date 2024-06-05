@@ -20,11 +20,9 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setUser(data.user);
       } else {
-        console.log("No user data returned"); // Log if no data returned
         setUser(null);
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
       setUser(null);
     } finally {
       setLoading(false);
@@ -41,20 +39,39 @@ export const AuthProvider = ({ children }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(userData),
+          credentials: "include",
         }
       );
 
       if (loginResponse.ok) {
-        const userResponse = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/current_user`
-        );
-        const userData = await userResponse.json();
-        setUser(userData.user);
+        fetchCurrentUser();
       } else {
         throw new Error("Login failed");
       }
+    } catch (error) {}
+  };
+
+  const register = async (userData) => {
+    try {
+      const registerResponse = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+          credentials: "include",
+        }
+      );
+
+      if (registerResponse.ok) {
+        fetchCurrentUser();
+      } else {
+        throw new Error("Registration failed");
+      }
     } catch (error) {
-      console.error("Error during sign in:", error);
+      console.error("Error during registration:", error);
     }
   };
 
@@ -64,14 +81,11 @@ export const AuthProvider = ({ children }) => {
         `${process.env.REACT_APP_BACKEND_URL}/logout`,
         {
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+          credentials: "include",
         }
       );
       if (response.ok) {
         setUser(null);
-        localStorage.removeItem("token");
       } else {
         throw new Error("Logout failed");
       }
@@ -81,7 +95,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, setUser, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user, isLoading, setUser, signIn, register, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

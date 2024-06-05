@@ -32,6 +32,9 @@ Collectors_Hangout_Firebase_Admin.json
 .env.production.local
 .env.production
 app.yaml
+emails.json
+exportFirebaseToJSON.js
+bulkUpdate.js
 
 npm-debug.log*
 yarn-debug.log*

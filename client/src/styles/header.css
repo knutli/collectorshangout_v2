@@ -1,87 +1,122 @@
 .header-container {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    padding: 1rem 2rem; /* Adjust the padding to control the height and horizontal padding of the header */
-    color: rgb(255, 255, 255);
-  }
-
-  .header-container.black-text {
-    color: rgb(0, 0, 0); /* Black text color */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: rgb(255, 255, 255);
 }
-  
+
+.header-container.black-text {
+  color: rgb(0, 0, 0); /* Black text color */
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 4rem; /* This sets the spacing between your menu items */
+  margin-left: auto; /* Pushes the navbar to the right */
+}
+
+nav a {
+  font-size: 0.9rem; /* This reduces the size of your text */
+  letter-spacing: 0.05rem; /* Optional: increases spacing between letters */
+  padding: 0.5rem 0; /* Vertical padding for clickable area */
+  transition: color 0.3s ease; /* Smooth transition for color change on hover */
+}
+
+span {
+  font-size: 0.9rem; /* This reduces the size of your text */
+  letter-spacing: 0.05rem; /* Optional: increases spacing between letters */
+  transition: color 0.3s ease; /* Smooth transition for color change on hover */
+}
+
+nav a:hover {
+  color: #cccccc; /* Lighter shade on hover for visibility */
+}
+
+/* Background with reduced opacity */
+.header-background {
+  background-color: rgba(255, 255, 255, 0.05); /* Adjust the alpha value for transparency */
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  color: black;
+  background-color: white;
+}
+
+.login-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.logged-in-as {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 3.9mm;
+}
+
+.logged-in-as img {
+  width: 30px;
+  height: 30px;
+  border-radius: 20%; /* Make the image circular */
+  margin: 5px 5px 5px 5px;
+}
+
+.logged-in-as img:hover {
+  cursor: pointer;
+}
+
+.login-screen-google-button img {
+  max-width: 200px;
+  margin: 16px 16px 16px 16px;
+  height: auto;
+}
+
+.hover:text-gray-300:hover {
+  color: gray; /* Change color on hover, adjust as needed */
+}
+
+/* Mobile navbar styles */
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  justify-content: space-around;
+  background-color: #fff;
+  border-top: 1px solid #eaeaea;
+  padding: 10px 0;
+}
+
+.mobile-nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.mobile-nav-link:hover {
+  color: #0070f3;
+}
+
+/* Media query to handle navbar transformation */
+@media (max-width: 450px) {
   nav {
+    display: none;
+  }
+  .mobile-nav {
     display: flex;
-    align-items: center; 
-    gap: 4rem; /* This sets the spacing between your menu items */
   }
-  
-  nav a {
-    font-size: 0.9rem; /* This reduces the size of your text */
-    letter-spacing: 0.05rem; /* Optional: increases spacing between letters */
-    padding: 0.5rem 0; /* Vertical padding for clickable area */
-    transition: color 0.3s ease; /* Smooth transition for color change on hover */
-  }
-
-  span {
-    font-size: 0.9rem; /* This reduces the size of your text */
-    letter-spacing: 0.05rem; /* Optional: increases spacing between letters */
-    padding: 0.5rem 0; /* Vertical padding for clickable area */
-    transition: color 0.3s ease; /* Smooth transition for color change on hover */
-  }
-  
-  nav a:hover {
-    color: #cccccc; /* Lighter shade on hover for visibility */
-  }
-  
-  /* Background with reduced opacity */
-  .header-background {
-    background-color: rgba(255, 255, 255, 0.05); /* Adjust the alpha value for transparency */
-    width: 100%;
-    position: absolute;
-    top: 0;
-    z-index: 10;
-  }
-
-  .login-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Full viewport height */
-    color: black;
-    background-color: white;
-  }
-
-  .login-header{
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  .logged-in-as{
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-    font-size:3.9mm;
-  }
-
-  .logged-in-as img {
-    width: 30px;
-    height: 30px;
-    border-radius: 20%; /* Make the image circular */
-    margin: 5px 5px 5px 5px;
-  }
-
-  .logged-in-as img:hover {
-    cursor: pointer;
-  }
-
-  .login-screen-google-button img {
-    max-width: 200px; 
-    margin: 16px 16px 16px 16px;
-    height: auto;
-  }
-
-  .hover:text-gray-300:hover {
-    color: gray; /* Change color on hover, adjust as needed */
-  }
+}

@@ -1,4 +1,4 @@
-const schedule = require("node-schedule");
+/* const schedule = require("node-schedule");
 const admin = require("firebase-admin");
 
 const io = require("socket.io")(); // You'll need to adjust this to get the instance from your server.js
@@ -26,4 +26,4 @@ const scheduleAuctionEnd = (auctionId, endTime) => {
   });
 };
 
-module.exports = { scheduleAuctionEnd };
+module.exports = { scheduleAuctionEnd }; */

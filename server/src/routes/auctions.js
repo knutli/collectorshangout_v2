@@ -13,24 +13,34 @@ module.exports = function (io) {
   // POST route to create a new auction
   async function createAuction(req, res) {
     try {
-      let { endTime, ...newAuctionData } = req.body;
-      
+      let { endTime, startTime, ...newAuctionData } = req.body;
+
       // Convert ISO string to Firestore Timestamp
       endTime = admin.firestore.Timestamp.fromDate(new Date(endTime));
-  
-      // Now create the new auction with the Firestore Timestamp endTime
+      startTime = admin.firestore.Timestamp.fromDate(new Date(startTime));
+
+      // Create the new auction with the Firestore Timestamp endTime
       const auctionRef = await db.collection("auctions").add({
         ...newAuctionData,
         endTime: endTime,
+        startTime: startTime,
+        isLive: true,
       });
-  
-      res.status(201).send({ id: auctionRef.id, ...newAuctionData, endTime });
+
+      res
+        .status(201)
+        .send({
+          id: auctionRef.id,
+          ...newAuctionData,
+          startTime,
+          endTime,
+          isLive: true,
+        });
     } catch (error) {
       console.error("Error creating auction: ", error);
       res.status(500).send("Error creating auction");
     }
   }
-  
 
   // GET route to get a single auction's details
   async function getAuctionDetails(req, res) {
@@ -87,7 +97,7 @@ module.exports = function (io) {
       return res.status(401).send({ message: "User not authenticated" });
     }
     const userId = req.user.uid;
-    console.log('user id: ', userId);
+    console.log("user id: ", userId);
     // const userId = "martin";
 
     try {

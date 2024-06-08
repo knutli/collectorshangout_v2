@@ -97,8 +97,8 @@ router.get(
     if (req.user && req.user.token) {
       res.cookie("temporary_auth_token", req.user.token, {
         httpOnly: true,
-        secure: false, // Ensure this is false for localhost
-        sameSite: "Lax", // Use SameSite=Lax for local development
+        secure: process.env.NODE_ENV === "production", // Secure in production
+        sameSite: "None", // Use SameSite=Lax for local development
         path: "/", // Explicitly set path to root
         maxAge: 60 * 60 * 24 * 1000,
       });
@@ -179,7 +179,7 @@ router.post("/register", async (req, res) => {
     res.cookie("temporary_auth_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
+      sameSite: "None",
       maxAge: 60 * 60 * 24 * 1000,
     });
     console.log("Cookie set with JWT:", token);
@@ -218,8 +218,8 @@ router.post("/login", async (req, res) => {
     console.log("Generated JWT token for login:", token);
     res.cookie("temporary_auth_token", token, {
       httpOnly: true,
-      secure: false, // Ensure this is false for localhost
-      sameSite: "Lax", // Use SameSite=Lax for local development
+      secure: process.env.NODE_ENV === "production", // Secure in production
+      sameSite: "None", // Use SameSite=Lax for local development
       path: "/", // Explicitly set path to root
       maxAge: 60 * 60 * 24 * 1000,
     });

@@ -20,10 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-  res.setHeader(
-    "Permissions-Policy",
-    "run-ad-auction=(self), private-state-token-redemption=(self), private-state-token-issuance=(self), join-ad-interest-group=(self), browsing-topics=(self)"
-  );
   next();
 });
 

@@ -6,6 +6,7 @@ Large marketplaces today are plagued with scams and fake items. Why? Because the
 
 Collectors Hangout is made to become a network of community-powered marketplaces, where individual contributors, moderators and experts can validate the items that are being put up for sale. When applying this across a series of markets, we can ensure higher quality items, less scammy actors and increased trust.
 
-## URL
+## Run the app locally
+Frontend and backend runs separately. Navigate to /client and /server, and start the app by running `npm run`. First in /server, then in /client. 
 
-Check out the current landing page [HERE](https://collectors-hangout.web.app/).
+

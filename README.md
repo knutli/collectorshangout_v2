@@ -9,4 +9,6 @@ Oase is made to become a network of community-powered marketplaces. We use AU co
 ## Run the app locally
 Frontend and backend runs separately. Navigate to /client and /server, and start the app by running `npm run`. First in /server, then in /client. 
 
+Experimental branch is furthest ahead. 
+
 
